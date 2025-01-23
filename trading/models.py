@@ -1,7 +1,5 @@
 from django.db import models
 
-import trading.models
-
 
 class ContactInfo(models.Model):
     """Модель для хранения контактной информации."""
@@ -43,7 +41,8 @@ class Vendor(models.Model):
     title = models.CharField(max_length=150, verbose_name='vendor title', help_text='Vendor name')
     level = models.IntegerField(choices=LEVELS, verbose_name='vendor level', help_text='Vendor level')
     contact = models.ForeignKey(ContactInfo, verbose_name='contacts', on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product, verbose_name='products', related_name='vendors')
+    products = models.ManyToManyField(Product, verbose_name='products', related_name='products')
+    supplier = models.ForeignKey('self', verbose_name='supplier', on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='created at',)
     debt_to_supplier = models.DecimalField(decimal_places=2, max_digits=15, default=0, verbose_name='debt to supplier')
 
