@@ -21,7 +21,7 @@ class Product(models.Model):
     """Модель для хранения продуктов."""
     title = models.CharField(max_length=100, verbose_name='name', help_text='Product name')
     model = models.CharField(max_length=100, verbose_name='model', help_text='Product model')
-    launched_at = models.DateTimeField(auto_now_add=False, verbose_name='launched product date',)
+    launched_at = models.DateField(auto_now_add=False, verbose_name='launched product date',)
 
     class Meta:
         verbose_name = "продукт"

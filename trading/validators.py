@@ -5,12 +5,12 @@ def validate_hierarchy(data):
     """Валидация иерархии объекта Vendor."""
     level = dict(data).get("level")
     supplier = dict(data).get("supplier")
-    if level > 0 and supplier is None:
+    if supplier and level <= supplier.level:
         raise ValidationError(
-            "При уровне больше 0 требуется указать поставщика."
+            "Поставщик должен быть выше в иерархии"
         )
-    elif supplier is not None and level <= supplier.level:
+    elif level != 0:
         raise ValidationError(
-            "Поставщик не может быть ниже или равен в иерархии"
+            "При уровне больше 0 укажите поставщика."
         )
     return data

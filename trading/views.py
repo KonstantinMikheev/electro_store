@@ -35,30 +35,42 @@ class ProductViewSet(viewsets.ModelViewSet):
     ordering_fields = ('title', 'model',)
 
 
-class VendorCreateAPIView(generics.CreateAPIView):
-    """API endpoint for creating a new vendor."""
-    serializer_class = VendorSerializer
-
-
-class VendorListAPIView(generics.ListAPIView):
-    """API endpoint for listing all vendors."""
-    serializer_class = VendorSerializer
-    queryset = Vendor.objects.all()
-
-
-class VendorRetrieveAPIView(generics.RetrieveAPIView):
-    """API endpoint for retrieving a specific vendor."""
-    serializer_class = VendorSerializer
-    queryset = Vendor.objects.all()
-
-
 class VendorUpdateAPIView(generics.UpdateAPIView):
     """API endpoint for updating a specific vendor."""
     serializer_class = VendorUpdateSerializer
     queryset = Vendor.objects.all()
 
 
-class VendorDestroyAPIView(generics.DestroyAPIView):
-    """API endpoint for deleting a specific vendor."""
-    serializer_class = VendorSerializer
+class VendorViewSet(viewsets.ModelViewSet):
+    """API endpoint for managing vendors."""
     queryset = Vendor.objects.all()
+    serializer_class = VendorSerializer
+    pagination_class = Paginator
+
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filter_fields = ('title', 'level', 'debt_to_supplier')
+    search_fields = ('title', 'level', 'debt_to_supplier')
+    ordering_fields = ('title', 'level', 'debt_to_supplier')
+
+
+# class VendorCreateAPIView(generics.CreateAPIView):
+#     """API endpoint for creating a new vendor."""
+#     serializer_class = VendorSerializer
+#
+#
+# class VendorListAPIView(generics.ListAPIView):
+#     """API endpoint for listing all vendors."""
+#     serializer_class = VendorSerializer
+#     queryset = Vendor.objects.all()
+#
+#
+# class VendorRetrieveAPIView(generics.RetrieveAPIView):
+#     """API endpoint for retrieving a specific vendor."""
+#     serializer_class = VendorSerializer
+#     queryset = Vendor.objects.all()
+
+
+# class VendorDestroyAPIView(generics.DestroyAPIView):
+#     """API endpoint for deleting a specific vendor."""
+#     serializer_class = VendorSerializer
+#     queryset = Vendor.objects.all()
